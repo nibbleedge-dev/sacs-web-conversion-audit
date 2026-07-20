@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>SACS Web Conversion Audit — Nibble Edge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#041E42;--cerulean:#02B2DF;--jaffa:#F37B50;--porcelain:#EAEBEC;
+    --shark:#212529;--hitgray:#ADB5BD;--white:#FFFFFF;--leaf:#9DC24A;--sand:#EAE0D0;
+    --navy-06:rgba(4,30,66,.06);--navy-12:rgba(4,30,66,.12);--navy-80:rgba(4,30,66,.82);
+    --serif:'Sentinel Pro','Zilla Slab',Georgia,'Times New Roman',serif;
+    --sans:'Neue Haas Grotesk Display Pro','Inter','Helvetica Neue',Arial,sans-serif;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--shark);background:var(--white);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;color:var(--navy);line-height:1.14;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+  .eyebrow{font-family:var(--sans);font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--cerulean)}
+
+  /* crest */
+  .crest{display:block}
+  .crest .fill{fill:currentColor}.crest .ln{fill:none;stroke:currentColor;stroke-width:2}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:var(--navy-80);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:12px;color:#fff;font-weight:600;font-size:15px}
+  .brand img{height:26px;display:block;border-radius:4px}
+  .navlinks{display:flex;gap:30px}
+  .navlinks a{color:rgba(255,255,255,.72);font-size:13.5px;font-weight:500;transition:color .2s}
+  .navlinks a:hover{color:#fff}
+  @media(max-width:880px){.navlinks{display:none}}
+
+  /* HERO */
+  .hero{position:relative;color:#fff;overflow:hidden;background:var(--shark)}
+  .hero .bg{position:absolute;inset:0;background-image:url('assets/hero.jpg');background-size:cover;background-position:center 30%}
+  .hero .ov{position:absolute;inset:0;background:rgba(4,30,66,.66)}
+  .hero .ov2{position:absolute;inset:0;background:radial-gradient(900px 520px at 82% 0%,rgba(2,178,223,.30),transparent 60%)}
+  .hero .wrap{position:relative;z-index:2;min-height:640px;display:flex;flex-direction:column;padding:56px 40px 0}
+  .hero-crest{color:#fff}
+  .hero-mid{margin-top:auto;padding-top:70px}
+  .hero-title{font-family:var(--serif);font-weight:600;color:#fff;font-size:clamp(64px,10vw,123px);line-height:1.0;letter-spacing:-.02em}
+  .hero-sub{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(30px,5.6vw,76px);color:#fff;line-height:1.12;letter-spacing:-.01em;margin-top:2px}
+  .hero-sub em{font-style:italic;color:var(--cerulean)}
+  .hero-foot{margin-top:52px;border-top:1px solid var(--sand);padding:22px 0 26px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .hero-foot span{font-family:var(--sans);font-size:clamp(13px,1.5vw,20px);letter-spacing:.12em;text-transform:uppercase;color:var(--sand);font-weight:500}
+
+  /* SECTIONS */
+  section{padding:104px 0}
+  .sec-head{max-width:860px;margin-bottom:52px}
+  .sec-head h2{font-size:clamp(32px,4.6vw,52px);margin-top:14px}
+  .sec-head p.lead{font-size:18px;color:#495057;margin-top:18px;font-weight:300;max-width:72ch}
+  .sec-num{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--jaffa);font-weight:600;letter-spacing:.04em}
+  .band{background:var(--porcelain)}
+  .band-navy{background:var(--navy);color:#fff}
+  .band-navy h2,.band-navy h3,.band-navy h4{color:#fff}
+
+  /* 01 OBJECTIVE */
+  .obj-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:start}
+  @media(max-width:880px){.obj-grid{grid-template-columns:1fr;gap:42px}}
+  .obj-statement{font-family:var(--serif);font-size:clamp(22px,3vw,33px);line-height:1.34;color:var(--navy);max-width:24ch}
+  .focus-list{display:grid;gap:14px;margin-top:8px}
+  .focus{display:flex;flex-direction:column;gap:5px;padding:19px 23px;background:#fff;border:1px solid var(--navy-12);border-radius:14px;transition:transform .2s,box-shadow .2s}
+  .focus:hover{transform:translateY(-3px);box-shadow:0 16px 34px -20px rgba(4,30,66,.45)}
+  .focus .ft{font-family:var(--serif);font-size:18px;color:var(--navy);font-weight:600}
+  .focus .ft b{color:var(--jaffa);font-weight:700}
+  .focus p{font-size:14px;color:#5a636b;line-height:1.45}
+  .keypages h4{font-size:21px;margin-bottom:6px}
+  .keypages .kp-sub{font-size:13px;color:var(--hitgray);margin-bottom:8px}
+  .keypages ul{list-style:none}
+  .keypages li{display:flex;gap:12px;align-items:center;padding:13px 0;border-top:1px solid var(--navy-12);font-size:15px;color:#3a444d}
+  .keypages li:first-child{border-top:none}
+  .keypages li .pg{width:9px;height:9px;border-radius:50%;background:var(--jaffa);flex:none}
+
+  /* 02 THEMES */
+  .themes{display:grid;grid-template-columns:1fr 1fr;gap:24px;grid-auto-rows:1fr}
+  @media(max-width:860px){.themes{grid-template-columns:1fr}}
+  .theme{background:#fff;border:1px solid var(--navy-12);border-radius:18px;padding:32px;position:relative;overflow:hidden;height:100%}
+  .theme::before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--cerulean),var(--jaffa))}
+  .theme .tnum{font-family:var(--serif);font-size:46px;color:var(--navy-12);font-weight:700;line-height:1}
+  .theme h3{font-size:23px;margin:6px 0 12px}
+  .theme .desc{font-size:14.5px;color:#5a636b;margin-bottom:20px}
+  .findings{list-style:none;display:grid;gap:10px}
+  .findings li{display:flex;gap:11px;font-size:14px;line-height:1.45;color:#33404a}
+  .findings li .ic{flex:none;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;margin-top:1px}
+  .ic.plus{background:rgba(2,178,223,.15);color:#0288b0}
+  .ic.minus{background:rgba(243,123,80,.17);color:#d1591f}
+
+  /* KEY PAGES COLLAGE BANNER */
+  .kp-banner{margin:74px 0 44px;border-radius:20px;overflow:hidden;position:relative;min-height:420px;background:#0a1830;display:flex;align-items:flex-end}
+  .kp-banner .kp-bg{position:absolute;inset:0;background:url('assets/keypages-bg.jpg') center/cover;opacity:.5}
+  .kp-banner .kp-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,15,35,.95) 0%,rgba(4,15,35,.4) 40%,rgba(4,15,35,.72) 100%)}
+  .kp-collage{position:absolute;inset:0;overflow:hidden}
+  .kp-collage img{position:absolute;object-fit:cover;border-radius:6px;box-shadow:0 24px 50px -20px rgba(0,0,0,.6)}
+  .kp-c1{width:280px;height:360px;left:36%;top:36px;transform:rotate(0deg);z-index:4}
+  .kp-c2{width:150px;height:300px;left:20%;top:120px;transform:rotate(-4deg);z-index:2;opacity:.92}
+  .kp-c3{width:160px;height:250px;left:60%;top:120px;transform:rotate(4deg);z-index:3;opacity:.95}
+  .kp-c4{width:120px;height:250px;left:6%;top:180px;transform:rotate(-7deg);z-index:1;opacity:.7}
+  .kp-c5{width:120px;height:240px;left:76%;top:150px;transform:rotate(6deg);z-index:1;opacity:.7}
+  @media(max-width:760px){.kp-collage{display:none}.kp-banner{min-height:220px}}
+  .kp-inner{position:relative;z-index:6;padding:44px 40px}
+  .kp-inner .eyebrow{color:var(--jaffa)}
+  .kp-inner h3{color:#fff;font-size:clamp(28px,4vw,44px);margin-top:10px}
+  .kp-inner h3 em{font-style:italic;color:var(--cerulean)}
+
+  .scroller-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:22px;flex-wrap:wrap}
+  .scroller-hint{font-size:13px;color:var(--hitgray)}
+  .scroller{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 26px}
+  .scroller::-webkit-scrollbar{height:8px}.scroller::-webkit-scrollbar-thumb{background:var(--navy-12);border-radius:8px}
+  .pcard{scroll-snap-align:start;flex:0 0 366px;background:#fff;border:1px solid var(--navy-12);border-radius:18px;padding:24px;display:flex;flex-direction:column}
+  @media(max-width:520px){.pcard{flex:0 0 85%}}
+  .pcard .ptag{align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--jaffa);background:rgba(243,123,80,.12);padding:5px 11px;border-radius:999px}
+  .pcard h4{font-size:20px;margin:12px 0 12px}
+  .lbl{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cerulean);margin-bottom:10px}
+  .obs{list-style:none;display:grid;gap:8px;margin-bottom:14px}
+  .obs li{font-size:13.5px;color:#3a444d;line-height:1.45;padding-left:16px;position:relative}
+  .obs li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--hitgray)}
+  .why{margin-top:auto;background:var(--navy);color:#fff;border-radius:12px;padding:15px 17px}
+  .why .lbl{color:var(--cerulean);margin-bottom:7px}.why p{font-size:13px;line-height:1.5;color:rgba(255,255,255,.88)}
+
+  /* 03 COMPETITORS */
+  .ctabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .ctab{border:1px solid var(--navy-12);background:#fff;color:var(--navy);font-family:var(--sans);font-weight:600;font-size:14px;padding:11px 21px;border-radius:999px;cursor:pointer;transition:.2s}
+  .ctab:hover{border-color:var(--cerulean)}
+  .ctab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .comp-intro{font-size:16px;color:#4a545c;max-width:76ch;margin-bottom:22px;font-weight:300}
+  .comp-intro strong{font-family:var(--serif);color:var(--navy);font-weight:600}
+  .comp-panel{display:none}.comp-panel.active{display:block;animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .ptabs{display:flex;flex-wrap:wrap;border:1px solid var(--navy-12);border-radius:12px 12px 0 0;overflow:hidden;background:#fff}
+  .ptab{flex:1 1 auto;min-width:110px;border:none;border-right:1px solid var(--navy-12);background:#fff;color:#5a636b;font-family:var(--sans);font-size:13px;font-weight:500;padding:14px 14px;cursor:pointer;transition:.18s;text-align:left}
+  .ptab:last-child{border-right:none}
+  .ptab:hover{color:var(--navy);background:#fafbfc}
+  .ptab.on{background:rgba(2,178,223,.1);color:var(--navy);font-weight:600;box-shadow:inset 0 -3px 0 var(--cerulean)}
+  .slide-card{border:1px solid var(--navy-12);border-top:none;border-radius:0 0 18px 18px;background:#fff;overflow:hidden}
+  .slide-viewport{overflow:hidden}
+  .slide-track{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+  .slide{flex:0 0 100%;padding:34px 36px 8px}
+  .slide-title{font-family:var(--serif);font-size:clamp(24px,3vw,34px);color:var(--navy);margin-bottom:24px;font-weight:500}
+  .slide-cols{display:grid;grid-template-columns:0.92fr 1.08fr;gap:40px;align-items:start}
+  @media(max-width:900px){.slide-cols{grid-template-columns:1fr;gap:28px}}
+  /* screenshot frame (real captures, scrollable) */
+  .shots{background:#f1f3f5;border:1px solid var(--navy-12);border-radius:12px;overflow-y:auto;max-height:560px;box-shadow:inset 0 -14px 22px -18px rgba(4,30,66,.3)}
+  .shots::-webkit-scrollbar{width:9px}.shots::-webkit-scrollbar-thumb{background:var(--navy-12);border-radius:8px}
+  .shots img{width:100%;display:block}
+  .shots-hint{font-size:11px;color:var(--hitgray);text-align:center;padding:8px 0 0;letter-spacing:.04em}
+  /* reference panel (competitors without captures) */
+  .refpanel{border:1px dashed var(--navy-12);border-radius:12px;background:linear-gradient(180deg,#fff,#f6f8fa);min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:34px;gap:14px}
+  .refpanel .mono{width:76px;height:76px;border-radius:18px;display:grid;place-items:center;color:#fff;font-family:var(--serif);font-weight:700;font-size:26px}
+  .refpanel .rp-name{font-family:var(--serif);font-size:22px;color:var(--navy);font-weight:600}
+  .refpanel .rp-page{font-size:13px;color:var(--hitgray);text-transform:uppercase;letter-spacing:.12em}
+  .refpanel a{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--cerulean);border:1px solid var(--cerulean);padding:9px 16px;border-radius:999px;transition:.2s}
+  .refpanel a:hover{background:var(--cerulean);color:#fff}
+  .rblock{margin-bottom:26px}
+  .rblock .rbar{width:64px;height:4px;border-radius:3px;margin-bottom:12px}
+  .rblock.obsv .rbar{background:var(--cerulean)}.rblock.matt .rbar{background:var(--jaffa)}
+  .rblock h5{font-family:var(--serif);font-size:22px;font-weight:600;margin-bottom:12px}
+  .rblock.obsv h5{color:var(--cerulean)}.rblock.matt h5{color:var(--jaffa)}
+  .obs-num{list-style:none;display:grid;gap:11px;counter-reset:o}
+  .obs-num li{display:flex;gap:12px;font-size:14.5px;line-height:1.5;color:#33404a;counter-increment:o}
+  .obs-num li::before{content:counter(o) ".";font-weight:700;color:var(--navy);flex:none}
+  .rblock.matt p{font-size:15px;line-height:1.6;color:#3a444d}
+  .learn-card{background:var(--navy);border-radius:14px;overflow:hidden;position:relative}
+  .learn-card .lbar{height:5px;background:var(--leaf)}
+  .learn-card .lc-in{padding:22px 26px 24px}
+  .learn-card h5{font-family:var(--serif);font-size:22px;color:var(--leaf);font-weight:600;margin-bottom:12px}
+  .learn-card p{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.9)}
+  .slide-ctrl{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 36px 30px}
+  .sdots{display:flex;gap:9px;flex-wrap:wrap}
+  .sdots button{width:9px;height:9px;border-radius:50%;border:none;background:var(--navy-12);cursor:pointer;padding:0;transition:.2s}
+  .sdots button.on{background:var(--cerulean);width:28px;border-radius:6px}
+  .sarrows{display:flex;gap:12px}
+  .sarrows button{width:52px;height:52px;border-radius:50%;border:none;background:var(--cerulean);color:#fff;cursor:pointer;font-size:22px;display:grid;place-items:center;transition:.2s;box-shadow:0 12px 26px -12px rgba(2,178,223,.8)}
+  .sarrows button:hover{background:var(--navy)}
+  .sarrows button:disabled{opacity:.3;cursor:not-allowed;box-shadow:none}
+  @media(max-width:560px){.sarrows button{width:44px;height:44px}}
+
+  /* 04 IMPROVEMENT */
+  .imp-carousel{max-width:920px;margin:0 auto}
+  .imp-viewport{overflow:hidden;border-radius:20px}
+  .imp-track{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+  .imp-slide{flex:0 0 100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:44px}
+  .imp-slide .iidx{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--jaffa);font-weight:700}
+  .imp-slide h3{font-size:clamp(23px,3vw,32px);margin:8px 0 24px;color:#fff}
+  .imp-slide ul{list-style:none;display:grid;gap:15px}
+  .imp-slide li{display:flex;gap:15px;font-size:15.5px;line-height:1.5;color:rgba(255,255,255,.9)}
+  .imp-slide li .in{flex:none;width:27px;height:27px;border-radius:50%;background:rgba(2,178,223,.22);color:var(--cerulean);display:grid;place-items:center;font-size:13px;font-weight:700}
+  .imp-ctrl{display:flex;align-items:center;justify-content:space-between;margin-top:28px}
+  .imp-ctrl .sarrows button{background:transparent;border:1px solid rgba(255,255,255,.3);box-shadow:none;width:46px;height:46px}
+  .imp-ctrl .sarrows button:hover{background:#fff;color:var(--navy)}
+  .imp-ctrl .sdots button{background:rgba(255,255,255,.25)}.imp-ctrl .sdots button.on{background:var(--cerulean)}
+
+  footer{background:var(--navy);color:rgba(255,255,255,.7);padding:48px 0;border-top:1px solid rgba(255,255,255,.08)}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  footer .brand{color:#fff}
+  footer small{font-size:12.5px;letter-spacing:.04em}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/nibble-logo.png" alt="Nibble Edge">Nibble Edge<span style="color:var(--hitgray);font-weight:400">&nbsp;×&nbsp;SACS</span></a>
+    <div class="navlinks">
+      <a href="#objective">Objective</a><a href="#audit">SACS Audit</a>
+      <a href="#competitors">Competitors</a><a href="#summary">Improvement Summary</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="bg"></div><div class="ov"></div><div class="ov2"></div>
+  <div class="wrap">
+    <div id="crestHero"></div>
+    <div class="hero-mid">
+      <div class="hero-title">SACS</div>
+      <div class="hero-sub">Web <em>Conversion</em> Audit</div>
+    </div>
+    <div class="hero-foot"><span>Nibble Edge × SACS</span><span>July 2026</span></div>
+  </div>
+</header>
+
+<section id="objective" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">01 — Objective</span><h2>Why we ran this audit</h2></div>
+    <div class="obj-grid">
+      <div class="reveal">
+        <p class="obj-statement">Review the website's conversion points and key pages to enhance parent conversions — optimising these pages for better performance and evaluating how they can be structured and organised.</p>
+        <div class="focus-list" style="margin-top:36px">
+          <span class="eyebrow" style="color:var(--jaffa);display:block;margin-bottom:6px">Analysis focus</span>
+          <div class="focus"><div class="ft"><b>1</b> · First Impressions &amp; Messaging</div><p>Does the site immediately communicate the school's value and engage prospective parents?</p></div>
+          <div class="focus"><div class="ft"><b>2</b> · User Journey &amp; Navigation</div><p>How easily can parents find information and progress towards an enquiry or application?</p></div>
+          <div class="focus"><div class="ft"><b>3</b> · Content &amp; Trust</div><p>Does content build confidence through clear messaging, social proof and compelling reasons to choose the school?</p></div>
+          <div class="focus"><div class="ft"><b>4</b> · Conversion Experience</div><p>How effective are the CTAs, forms and the overall enquiry and enrolment journey?</p></div>
+        </div>
+      </div>
+      <aside class="keypages reveal d2">
+        <h4>Key pages reviewed</h4>
+        <p class="kp-sub">The conversion points that matter most for prospective families</p>
+        <ul>
+          <li><span class="pg"></span>Homepage &amp; enrolment journey</li>
+          <li><span class="pg"></span>Junior School (K–6)</li>
+          <li><span class="pg"></span>Middle School (7–9)</li>
+          <li><span class="pg"></span>Senior College (10–12)</li>
+          <li><span class="pg"></span>Events / Open Day registration</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="audit">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">02 — SACS Conversion Audit</span>
+      <h2>What we found across the SACS site</h2>
+      <p class="lead">Assessed against the four focus areas, then page by page. SACS impresses on brand and content — the opportunity is to turn an information-led experience into a conversion-led one.</p>
+    </div>
+    <div class="themes" id="themes"></div>
+    <div class="kp-banner reveal">
+      <div class="kp-bg"></div><div class="kp-shade"></div>
+      <div class="kp-collage">
+        <img class="kp-c4" src="assets/collage4.jpg" alt="">
+        <img class="kp-c2" src="assets/collage2.jpg" alt="">
+        <img class="kp-c1" src="assets/collage1.jpg" alt="">
+        <img class="kp-c3" src="assets/collage3.jpg" alt="">
+        <img class="kp-c5" src="assets/collage5.jpg" alt="">
+      </div>
+      <div class="kp-inner"><span class="eyebrow">Page-by-page</span><h3>SACS: <em>Key conversion pages</em></h3></div>
+    </div>
+    <div>
+      <div class="scroller-head reveal">
+        <div><span class="eyebrow" style="color:var(--jaffa)">Page-by-page</span><h3 style="font-size:26px;margin-top:8px">Key conversion pages</h3></div>
+        <span class="scroller-hint">Scroll horizontally →</span>
+      </div>
+      <div class="scroller" id="sacsPages"></div>
+    </div>
+  </div>
+</section>
+
+<section id="competitors" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">03 — Competitor Analysis</span>
+      <h2>Best practice from the field</h2>
+      <p class="lead">What leading Sydney schools do well on conversion, page by page — with the learnings SACS can borrow. Switch schools with the tabs, then step through each page in the slider.</p>
+    </div>
+    <div class="ctabs reveal" id="compTabs"></div>
+    <div id="compPanels" class="reveal d1"></div>
+  </div>
+</section>
+
+<section id="summary" class="band-navy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num" style="color:var(--cerulean)">04 — Improvement Summary</span>
+      <h2>How SACS can streamline for conversion</h2>
+      <p class="lead" style="color:rgba(255,255,255,.72)">The priority opportunities, grouped by focus area. Step through each set of recommendations.</p>
+    </div>
+    <div class="imp-carousel reveal d1">
+      <div class="imp-viewport"><div class="imp-track" id="impTrack"></div></div>
+      <div class="imp-ctrl">
+        <div class="sdots" id="impDots"></div>
+        <div class="sarrows"><button onclick="impMove(-1)" aria-label="Previous">‹</button><button onclick="impMove(1)" aria-label="Next">›</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/nibble-logo.png" alt="Nibble Edge">Nibble Edge<span style="color:var(--hitgray);font-weight:400">&nbsp;×&nbsp;SACS</span></a>
+    <small>SACS Web Conversion Audit · July 2026 · Internal file</small>
+  </div>
+</footer>
+
+<script>
+/* ---- St Andrew's crest (SVG facsimile) ---- */
+function crestSVG(){return `<svg class="crest hero-crest" width="72" height="96" viewBox="0 0 72 96" xmlns="http://www.w3.org/2000/svg" aria-label="St Andrew's Cathedral School">
+  <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+    <path d="M36 4 v7 M32 7 h8"/><circle cx="36" cy="3" r="1.7" fill="currentColor" stroke="none"/>
+    <path d="M22 22 q14 -12 28 0 l-3 6 q-11 -8 -22 0 z"/>
+    <path d="M25 28 h22 l3 5 H22 z"/>
+  </g>
+  <path d="M23 34 h26 v16 q0 15 -13 21 q-13 -6 -13 -21 z" fill="currentColor"/>
+  <path d="M23 34 h26 v16 q0 15 -13 21 q-13 -6 -13 -21 z" fill="none" stroke="#041E42" stroke-width="0"/>
+  <g stroke="#041E42" stroke-width="3.4" stroke-linecap="round"><path d="M26 37 L46 66"/><path d="M46 37 L26 66"/></g>
+  <g fill="#fff"><circle cx="36" cy="41" r="1.7"/><circle cx="29" cy="51" r="1.7"/><circle cx="43" cy="51" r="1.7"/><circle cx="36" cy="60" r="1.7"/></g>
+  <g fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 70 q20 8 40 0 l-4 7 q-16 6 -32 0 z"/></g>
+  <text x="36" y="88" text-anchor="middle" font-family="Zilla Slab,serif" font-size="9.5" font-weight="600" letter-spacing="1" fill="currentColor">ST ANDREW'S</text>
+  <text x="36" y="95" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.6" letter-spacing="2.2" fill="currentColor">CATHEDRAL SCHOOL</text>
+</svg>`;}
+document.getElementById('crestHero').innerHTML=crestSVG();
+
+/* ---- DATA ---- */
+const themes=[
+ {n:"1",title:"First Impressions & Messaging",desc:"SACS impresses with premium design and clear offerings, but the homepage prioritises storytelling over quickly conveying value for prospective parents.",findings:[["plus","Premium look and feel reinforces brand credibility."],["plus","Strong imagery showcases student life and the learning environment."],["minus","Core value proposition is not immediately obvious."],["minus","Hero sections prioritise branding over conversion-focused messaging."],["minus","Competitors communicate benefits and admissions pathways much earlier."]]},
+ {n:"2",title:"User Journey & Navigation",desc:"Comprehensive information across each school stage, but users navigate multiple pages before reaching admissions or enquiry actions.",findings:[["plus","Logical navigation across Junior, Middle and Senior School."],["plus","Rich content supports research and exploration."],["minus","Admissions pathways are not consistently surfaced."],["minus","Path to conversion is longer than competitors, adding cognitive load."]]},
+ {n:"3",title:"Content & Trust",desc:"Strong credibility through heritage, academic excellence and content — but trust-building assets aren't consistently integrated across the decision journey.",findings:[["plus","High-quality educational and co-curricular content."],["plus","Strong institutional reputation and academic positioning."],["minus","Limited use of testimonials and parent success stories."],["minus","Trust signals are separated from conversion opportunities."],["minus","Competitors integrate social proof throughout the journey."]]},
+ {n:"4",title:"Conversion Experience",desc:"Multiple CTAs and a structured enquiry form exist, but the overall experience adds unnecessary friction on the path from interest to enquiry.",findings:[["minus","Conversion actions exist but are not consistently prioritised."],["minus","CTA placement and styling vary across pages."],["minus","Enquiry forms require significant upfront effort."],["minus","Competitors use shorter forms and stronger CTA hierarchy."]]}
+];
+const sacsPages=[
+ {tag:"Homepage",title:"Homepage & Enrolment Journey",obs:["Premium first impression, but the hero prioritises brand messaging over a clear value proposition for parents.","Multiple navigation paths without a clear, guided journey from discovery to enquiry.","Limited emphasis on trust signals such as outcomes, testimonials and parent stories.","CTAs are infrequent and focus on high-commitment actions."],why:"The homepage shapes perception of the school. A clearer value proposition, stronger trust signals and a more guided journey can reduce friction and encourage more parents to enquire, book a tour or begin enrolment."},
+ {tag:"Junior School",title:"Junior School (K–6)",obs:["The hero describes the school rather than communicating the benefits for families.","Content is well structured, but there's no clear progression to the next step.","Relies on descriptive content more than measurable outcomes or parent-focused proof.","Enquiry and tour CTAs aren't consistently reinforced through the page."],why:"Parents exploring a specific stage are further along in their decision journey. Stronger proof points and well-placed CTAs can move more families toward enrolment."},
+ {tag:"Middle School",title:"Middle School (7–9)",obs:["Lacks a clear value proposition or what sets SACS apart.","Architecture shows the school's structure, not the parent's decision journey.","Key differentiators and evidence sit on subpages, not immediately visible.","Conversion opportunities are standalone rather than tied to user intent."],why:"The experience prioritises the school's structure over parents' decision-making. Simplifying navigation and guiding users will reduce friction and improve conversion."},
+ {tag:"Senior College",title:"Senior College (10–12)",obs:["The hero emphasises stage over why to choose SACS; the unique value isn't clear.","Organised by school structure, not a parent's journey.","Academic outcomes and success stories aren't consistently highlighted.","Enquiry pathways are separate from content and high-intent moments."],why:"Prospective parents must hunt across sections for key differentiators. Simplifying the journey and aligning CTAs with intent will increase enquiries."},
+ {tag:"Events / Open Day",title:"Events & Open Day Registration",obs:["Focuses on logistics more than the value of attending — doesn't answer “Why visit SACS?”","Filtering is unclear and cards give limited guidance on relevance.","Event info lacks family experience and past-visitor value.","Registration is easy once chosen, but the page lacks persuasion before commitment."],why:"School events are among the highest-intent conversion opportunities. Communicating the value of attending and reinforcing trust before registration will lift confidence and grow registrations."},
+ {tag:"Overall",title:"Overall Conversion Journey",obs:["An information-led journey rather than a conversion-led one.","The homepage acts as a navigation hub instead of a conversion gateway.","Stage landing pages read as content directories rather than persuasive pages.","The funnel jumps from browsing to high-commitment actions."],why:"The site prioritises information architecture over the parent decision journey. Simplifying the conversion path and introducing contextual CTAs will improve enquiry and enrolment conversions."}
+];
+
+const NSHOTS={
+ "homepage":6,"stanmore-k6":6,"stanmore-712":5,"registration":5,"admissions":4,"book-a-tour":2,"events":2
+};
+function shots(dir,n){let a=[];for(let i=1;i<=n;i++)a.push(`assets/newington/${dir}/${String(i).padStart(2,'0')}.jpg`);return a;}
+
+const competitors=[
+ {name:"Newington",mono:"N",url:"newington.nsw.edu.au",brand:"#0E1F3D",
+  tagline:"Minimises friction with clear, contextual pathways to enquire or apply, reinforcing trust before every key conversion opportunity.",
+  pages:[
+   {page:"Homepage",dir:"homepage",obs:["Multiple high-intent CTAs (Book a Tour, Enquire, Apply) are visible throughout the homepage.","Every key content section leads to a next-step CTA.","Campus and admissions pathways are surfaced early.","Admissions messaging promotes early registration.","Trust signals (heritage, leadership and community) support conversion CTAs."],why:"Newington minimises friction by offering clear, contextual pathways to enquire or apply while reinforcing trust before every key conversion opportunity.",learn:"Increase the visibility and frequency of contextual CTAs, simplify entry into admissions journeys, and strengthen trust signals around conversion points to encourage more enquiries."},
+   {page:"Stanmore K–6",dir:"stanmore-k6",obs:["Leadership message is supported by a personal video, creating a more human introduction than SACS' Junior School page.","Location info (PDF and Google Maps) is shown on the page, not requiring navigation.","Student videos engage more emotionally than static content.","Ends with two clear conversion options (Book a Tour and Request a Prospectus) instead of a single next step.","The page builds trust through leadership and student experience before asking parents to convert."],why:"Newington builds trust better than SACS by using leadership, videos, and practical campus info to support enrolment.",learn:"Focus on a trust-led conversion journey that builds confidence and guides parents to the next step."},
+   {page:"Stanmore 7–12",dir:"stanmore-712",obs:["The page introduces the campus with two immediate conversion options (View Campus Map and Watch Campus Tour) instead of only descriptive content.","Co-curricular programmes are presented as a visual gateway to explore more.","A dedicated Book a Tour section is prominently positioned before the footer, making the primary conversion action difficult to miss.","Campus information is paired with a View Campus Map CTA.","The page concludes with additional pathways (Head of Campus video and student content) before the global footer."],why:"Newington offers more interactive touchpoints for parents to explore the campus and student experience before booking a tour.",learn:"Enhance the Senior School page with tools like virtual tours and maps, and add sections to guide parents to book a tour or make an enquiry."},
+   {page:"Registration & Enrolment",dir:"registration",obs:["An Enquire Now CTA appears immediately after the page introduction rather than waiting until the end.","The enrolment journey is broken into numbered, sequential steps with individual CTAs (e.g. Apply Here).","Frequently Asked Questions are surfaced before the application journey.","Every major enrolment stage has its own CTA rather than one generic action.","Information is organised into digestible sections instead of long-form content."],why:"Compared with SACS, Newington turns a complex admissions process into a structured journey with clear actions at every stage, reducing friction and increasing confidence.",learn:"Replace long-form admissions content with a guided, step-based experience supported by contextual CTAs and FAQs to help parents progress with confidence."},
+   {page:"Admissions",dir:"admissions",obs:["Parents are offered multiple pathways immediately (Registration & Enrolment, Enquire Now).","Campus tours are promoted alongside a Virtual Tour option.","Boarding is promoted as a dedicated pathway instead of being buried in navigation.","Admissions content is grouped into clear decision-making sections rather than one continuous page.","Each admissions section ends with its own CTA (Book a Tour, Discover More, Enquire)."],why:"Newington caters to different parent intent levels by providing multiple conversion paths instead of relying on a single enquiry journey.",learn:"Offer more tailored admissions pathways and support exploration with contextual CTAs, including virtual experiences for parents not yet ready to visit."},
+   {page:"Book a Tour",dir:"book-a-tour",obs:["Parents can either view current tours or register their interest if no tours are available.","A dedicated contact section with CTA and phone number supports parents needing assistance.","Expectations for tours (Open Days, small groups, information sessions) are explained before booking.","Additional leadership and student content is presented after the booking options.","The page supports both immediate booking and future intent through separate CTAs."],why:"Compared with SACS, Newington recognises that not every parent is ready to book immediately and provides alternative conversion routes rather than creating dead ends.",learn:"Design the tour journey to capture both immediate and future intent by combining online booking, register-interest options and direct admissions support."},
+   {page:"Events - Booking page",dir:"events",obs:["The event details are presented in a compact, scannable layout before the form, making key information easier to review at a glance.","The page maintains a single-purpose, distraction-free layout, with minimal visual elements competing with the registration action.","Practical event details (date, time and location) are grouped together in one clear information block."],why:"Newington's booking page prioritises clarity and focus, making it slightly easier for parents to validate event details before completing registration.",learn:"Adopt a more compact presentation of event information and reduce visual distractions around the registration form to create a cleaner, more task-focused booking experience."}
+  ]},
+ {name:"Redlands",mono:"R",url:"redlands.nsw.edu.au",brand:"#B4141E",
+  tagline:"Helps parents make informed decisions before they enquire, pairing clear value propositions with multiple low-friction pathways for every level of intent.",
+  pages:[
+   {page:"Homepage",obs:["The hero presents two primary CTAs — Request a Prospectus and Book a Tour — alongside the value proposition.","Three distinct value pillars each have a dedicated pathway.","Parents can enter by age and stage, not just by division.","Discovery options (Meet Our Teachers, Virtual Tours, Open Mornings) are promoted before applying."],why:"Low-friction pathways matched to different levels of intent let parents self-select the next step that suits them.",learn:"Highlight admissions actions, clearly communicate SACS' value, and provide multiple pathways for parents to enquire."},
+   {page:"Junior School",obs:["Names the audience and articulates its philosophy, helping parents judge fit for their child.","Organised around key decision points — learning, wellbeing, facilities.","Classroom photography showcases specialist programmes and individual growth.","Multiple entry points into the funnel, not one CTA."],why:"Structuring the page around the questions parents actually ask creates an intuitive decision journey that builds confidence.",learn:"Use anchor navigation, parent-centric content and contextual enrolment pathways to make pages easier to scan."},
+   {page:"Secondary",obs:["The hero positions Secondary as preparing students for life beyond school.","Sections cover academics, wellbeing, co-curricular and leadership.","Credibility built through the IB programme, global experiences and personalised learning.","Admissions pathways integrated without disrupting browsing."],why:"A future-focused narrative paired with admissions pathways builds confidence and encourages enquiries.",learn:"Focus the Senior School on student outcomes and future readiness, with clear CTAs for enrolment."},
+   {page:"School Tour",obs:["Highlights the benefits of attending a tour before registration, easing uncertainty early.","Parents browse tours, select a stage, then view details and registration — preventing overload.","Outlines what to expect: meeting leaders, exploring facilities, learning the curriculum.","Registration is the focus, with clear CTAs and few distractions."],why:"Answering key questions before the form appears means parents register with confidence, improving admissions leads.",learn:"Design the tour journey as a guided funnel — explain the experience before registration and minimise distractions."}
+  ]},
+ {name:"Reddam House",mono:"RH",url:"sydney.reddamhouse.com.au",brand:"#E0631E",
+  tagline:"Moves families from inspiration to action with a strong value proposition and structured content that builds trust and creates opportunities to enquire or book a tour.",
+  pages:[
+   {page:"Homepage",obs:["The hero conveys a premium position with a bold value proposition and clear enrolment messaging.","Focuses on the parent journey — Early Learning, Primary, Secondary, Admissions.","Social proof via achievements and student success reinforces a premium reputation.","Conversion actions (Book a Tour, Enquire, Apply) recur through the journey."],why:"A premium value proposition plus recurring, journey-led CTAs keeps families engaged and encourages enrolment.",learn:"Present a stronger premium value proposition with recurring CTAs focused on the parent journey."},
+   {page:"Primary School",obs:["Clearly shows why parents should choose Reddam via its philosophy and personalised learning.","Highlights the parent journey with access to each stage and Admissions.","Social proof comes from achievements and student success.","Conversion opportunities include Book a Tour, Enquire, Apply."],why:"Building confidence and asking parents to act reduces uncertainty and reinforces value.",learn:"Guide parents on a confidence-building journey — answer key questions before presenting actions."},
+   {page:"High School",obs:["Presents a value proposition positioning senior years as a pathway to university and beyond.","Highlights academic excellence, subject choice, support and university prep.","Trust built through HSC outcomes and authentic learning experiences.","CTAs integrated for parents to act after reviewing content."],why:"Aligning messaging with senior parents' motivations before clear CTAs builds trust and increases enquiries.",learn:"Focus the Senior School on measurable outcomes, using evidence to build confidence before CTAs."}
+  ]},
+ {name:"PLC Sydney",mono:"PLC",url:"plc.nsw.edu.au",brand:"#0B3C6E",
+  tagline:"Inspires and reassures, building trust before admissions actions — reducing uncertainty and smoothing the journey from first impression to booking.",
+  pages:[
+   {page:"Homepage",obs:["Positions PLC as a premium school, showcasing heritage, philosophy and outcomes.","Answers key enrolment questions on academics, wellbeing and school life.","Credibility from achievements, success stories and authentic imagery.","High-intent actions (Book a Tour, Apply) are always visible."],why:"Inspiring and reassuring content builds trust before the admissions ask, reducing uncertainty.",learn:"Create a confidence-first enrolment journey — combine a strong value proposition with proof points and admissions CTAs."},
+   {page:"Junior School",obs:["Positions Junior School around building confidence, curiosity and love of learning.","Addresses learning philosophy, wellbeing and specialist programmes.","Supports its promise with real student experiences and community.","Book a Tour, Enquire and Apply pathways available."],why:"Addressing enrolment questions before admissions actions smooths the move from researching to booking.",learn:"Build Junior School pages around parent decisions, using proof points before CTAs."},
+   {page:"Enrolment Process",obs:["Presents enrolment as clear and simple, outlining each step to ease anxiety.","Breaks the process into stages with requirements and timelines.","Builds confidence with clear guidance and contact info before applying.","Direct links to Apply, Enquire and admissions resources."],why:"Parents on the enrolment page are high-intent — a clear, supported process lifts completed applications.",learn:"Create a guided enrolment funnel with clear steps and support, plus Apply and Enquire contacts."}
+  ]},
+ {name:"Barker",mono:"B",url:"barker.college",brand:"#C8102E",
+  tagline:"Uses storytelling to build confidence, turning the site into an admissions channel that encourages bookings, enquiries and applications.",
+  pages:[
+   {page:"Homepage",obs:["A future-focused message invites parents to explore.","Addresses key questions — learning, wellbeing, co-curricular, boarding.","Student stories and achievements help parents validate the school's claims.","Book a Tour, Enquire and Apply pathways available."],why:"Storytelling builds confidence and positions the homepage as an admissions channel, not just a brochure.",learn:"Design a homepage that instils confidence for admissions with CTAs like Book a Tour and Enquire Now."},
+   {page:"Senior School",obs:["Focuses on preparing students for university and life beyond.","Covers academic pathways, subject choice, wellbeing and leadership.","Builds confidence with proof of academic success and outcomes.","Book a Tour, Enquire and Apply CTAs included."],why:"Linking the approach to measurable outcomes answers enrolment objections and encourages families to act.",learn:"Design stage pages as guided journeys highlighting academic success alongside clear CTAs."},
+   {page:"Enrolment",obs:["Presents a personalised admissions experience guiding families through the journey.","Consolidates admissions, fees, scholarships and tours in one place.","Grows confidence with clear guidance and access to the Admissions team.","Acts as an admissions hub with multiple pathways."],why:"Consolidating key admissions actions helps parents transition smoothly from research to application.",learn:"Create an Admissions Hub with paths to Book a Tour, Enquire and Apply, plus fees, dates and FAQs."}
+  ]},
+ {name:"MLC",mono:"MLC",url:"mlcsyd.nsw.edu.au",brand:"#0E5A3C",
+  tagline:"Treats the homepage as the start of the admissions funnel, using content to build confidence before offering a conversion opportunity.",
+  pages:[
+   {page:"Homepage",obs:["Highlights a promise of future-ready education and outcomes.","Answers key questions — Why MLC? How will my child learn? What opportunities?","Uses student stories and achievements to validate claims.","Book a Tour, Enquire and Apply CTAs at the point of highest confidence."],why:"Building confidence through content before the conversion ask reduces friction and increases tour bookings.",learn:"Create a homepage enrolment funnel that builds confidence and prompts action with well-placed CTAs."},
+   {page:"Junior School",obs:["Shows why parents choose MLC for the early years.","Answers learning approach, wellbeing and transition questions.","Builds credibility with real classroom experiences and student stories.","Book a Tour, Enquire and Apply pathways run throughout."],why:"Addressing parent concerns before admissions actions reduces uncertainty and encourages a tour.",learn:"Structure Junior School pages to address concerns before commitment, paired with clear CTAs."},
+   {page:"Enrolments",obs:["Reassures parents that enrolment is personalised and supported.","Consolidates steps, fees, scholarships and FAQs.","Admissions contacts and resources build confidence before applying.","Acts as an admissions hub with multiple pathways."],why:"Offering the right pathway for each decision stage reduces friction and progresses more families to enquiry.",learn:"Create an admissions hub for varied intents — Book a Tour, Enquire, Apply — from one destination."}
+  ]}
+];
+
+const improvements=[
+ {idx:"Opportunity 01",title:"First Impressions & Messaging",items:["Clarify SACS' unique value proposition within the first screen so parents immediately understand what sets the school apart.","Shift hero messaging from institution-focused to parent-focused.","Prioritise the strongest differentiators earlier.","Create a stronger visual hierarchy that guides users to the next step.","Reinforce admissions pathways from the outset with visible CTAs."]},
+ {idx:"Opportunity 02",title:"User Journey & Navigation",items:["Simplify navigation to reduce steps to key admissions and enquiry pages.","Surface high-intent destinations more consistently.","Improve content hierarchy so parents can scan by their child's stage.","Create contextual navigation between related pages.","Design journeys around parent goals rather than org structure."]},
+ {idx:"Opportunity 03",title:"Content & Trust",items:["Integrate testimonials, parent stories and student success throughout.","Showcase measurable proof near decision points.","Balance institutional messaging with emotional storytelling.","Reinforce credibility with rankings, accreditations and media.","Position trust-building content immediately before conversion moments."]},
+ {idx:"Opportunity 04",title:"Conversion Experience",items:["Establish a consistent CTA system across all pages.","Reduce friction by simplifying forms and collecting info progressively.","Increase visibility of primary conversion actions throughout.","Create stronger transitions from information to action via contextual CTAs."]},
+ {idx:"Priority",title:"From information-led to conversion-led",items:["Reframe the homepage as a conversion gateway, not a navigation hub.","Turn stage landing pages into persuasive pages.","Add progressive engagement between browsing and high-commitment actions.","Embed contextual CTAs at the moments of highest intent."]}
+];
+
+/* ---- RENDER ---- */
+document.getElementById('themes').innerHTML=themes.map((t,i)=>`
+ <article class="theme reveal d${(i%2)+1}"><div class="tnum">${t.n}</div><h3>${t.title}</h3><p class="desc">${t.desc}</p>
+   <ul class="findings">${t.findings.map(f=>`<li><span class="ic ${f[0]}">${f[0]==='plus'?'+':'–'}</span>${f[1]}</li>`).join('')}</ul></article>`).join('');
+
+document.getElementById('sacsPages').innerHTML=sacsPages.map(p=>`
+ <article class="pcard"><span class="ptag">${p.tag}</span><h4>${p.title}</h4>
+   <div class="lbl">Key observations</div><ul class="obs">${p.obs.map(o=>`<li>${o}</li>`).join('')}</ul>
+   <div class="why"><div class="lbl">Why it matters</div><p>${p.why}</p></div></article>`).join('');
+
+function leftCol(c,pg){
+ if(pg.dir){ // real screenshots
+   const imgs=shots(pg.dir,NSHOTS[pg.dir]).map(s=>`<img loading="lazy" src="${s}" alt="${c.name} ${pg.page}">`).join('');
+   return `<div><div class="shots">${imgs}</div><div class="shots-hint">↕ Scroll — full ${c.name} ${pg.page.toLowerCase()} capture</div></div>`;
+ }
+ return `<div class="refpanel"><div class="mono" style="background:${c.brand}">${c.mono}</div>
+   <div class="rp-name">${c.name}</div><div class="rp-page">${pg.page}</div>
+   <a href="https://${c.url}" target="_blank" rel="noopener">Visit live page ↗</a></div>`;
+}
+const compTabs=document.getElementById('compTabs'),compPanels=document.getElementById('compPanels');
+compTabs.innerHTML=competitors.map((c,i)=>`<button class="ctab${i===0?' active':''}" data-i="${i}">${c.name}</button>`).join('');
+compPanels.innerHTML=competitors.map((c,i)=>{
+ const ptabs=c.pages.map((pg,pi)=>`<button class="ptab${pi===0?' on':''}" data-goto="${pi}">${pg.page}</button>`).join('');
+ const slides=c.pages.map(pg=>`
+  <div class="slide"><div class="slide-title">${pg.page}</div>
+    <div class="slide-cols">${leftCol(c,pg)}
+      <div>
+        <div class="rblock obsv"><div class="rbar"></div><h5>Key Observation</h5><ul class="obs-num">${pg.obs.map(o=>`<li>${o}</li>`).join('')}</ul></div>
+        <div class="rblock matt"><div class="rbar"></div><h5>Why it matters</h5><p>${pg.why}</p></div>
+        <div class="learn-card"><div class="lbar"></div><div class="lc-in"><h5>Learnings for SACS</h5><p>${pg.learn||pg.why}</p></div></div>
+      </div></div></div>`).join('');
+ const dots=c.pages.map((pg,pi)=>`<button data-goto="${pi}"${pi===0?' class="on"':''}></button>`).join('');
+ return `<div class="comp-panel${i===0?' active':''}" data-i="${i}">
+   <p class="comp-intro"><strong>${c.name}.</strong> ${c.tagline}</p>
+   <div class="slider"><div class="ptabs">${ptabs}</div>
+     <div class="slide-card"><div class="slide-viewport"><div class="slide-track">${slides}</div></div>
+       <div class="slide-ctrl"><div class="sdots">${dots}</div>
+         <div class="sarrows"><button class="sprev" aria-label="Previous">‹</button><button class="snext" aria-label="Next">›</button></div></div></div></div></div>`;
+}).join('');
+
+compTabs.addEventListener('click',e=>{const b=e.target.closest('.ctab');if(!b)return;const i=b.dataset.i;
+ compTabs.querySelectorAll('.ctab').forEach(t=>t.classList.toggle('active',t.dataset.i===i));
+ compPanels.querySelectorAll('.comp-panel').forEach(p=>p.classList.toggle('active',p.dataset.i===i));});
+document.querySelectorAll('.slider').forEach(sl=>{let cur=0;const track=sl.querySelector('.slide-track');const total=track.children.length;
+ const dots=sl.querySelectorAll('.sdots button'),ptabs=sl.querySelectorAll('.ptab'),prev=sl.querySelector('.sprev'),next=sl.querySelector('.snext');
+ const shotsEls=sl.querySelectorAll('.shots');
+ function go(n){cur=(n+total)%total;track.style.transform=`translateX(-${cur*100}%)`;
+   dots.forEach((d,di)=>d.classList.toggle('on',di===cur));ptabs.forEach((t,ti)=>t.classList.toggle('on',ti===cur));
+   prev.disabled=cur===0;next.disabled=cur===total-1;shotsEls.forEach(s=>s.scrollTop=0);}
+ prev.addEventListener('click',()=>go(cur-1));next.addEventListener('click',()=>go(cur+1));
+ dots.forEach(d=>d.addEventListener('click',()=>go(+d.dataset.goto)));ptabs.forEach(t=>t.addEventListener('click',()=>go(+t.dataset.goto)));go(0);});
+
+const impTrack=document.getElementById('impTrack'),impDots=document.getElementById('impDots');
+impTrack.innerHTML=improvements.map(im=>`<div class="imp-slide"><div class="iidx">${im.idx}</div><h3>${im.title}</h3><ul>${im.items.map((it,n)=>`<li><span class="in">${n+1}</span>${it}</li>`).join('')}</ul></div>`).join('');
+impDots.innerHTML=improvements.map((im,i)=>`<button data-d="${i}"${i===0?' class="on"':''}></button>`).join('');
+let impI=0;const impTotal=improvements.length;
+function impGo(n){impI=(n+impTotal)%impTotal;impTrack.style.transform=`translateX(-${impI*100}%)`;impDots.querySelectorAll('button').forEach((d,di)=>d.classList.toggle('on',di===impI));}
+function impMove(d){impGo(impI+d);}
+impDots.querySelectorAll('button').forEach(d=>d.addEventListener('click',()=>impGo(+d.dataset.d)));
+
+const io=new IntersectionObserver((es)=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const bg=document.querySelector('.hero .bg');
+window.addEventListener('scroll',()=>{const y=window.scrollY;if(y<820&&bg)bg.style.transform=`translateY(${y*0.18}px) scale(1.05)`;},{passive:true});
+</script>
+</body>
+</html>
