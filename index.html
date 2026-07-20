@@ -149,10 +149,11 @@
   @media(max-width:560px){.sarrows button{width:44px;height:44px}}
 
   /* 03 COMPETITORS */
-  .ctabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-  .ctab{border:1px solid var(--navy-12);background:#fff;color:var(--navy);font-family:var(--sans);font-weight:600;font-size:14px;padding:11px 21px;border-radius:999px;cursor:pointer;transition:.2s}
-  .ctab:hover{border-color:var(--cerulean)}
-  .ctab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .ctabs{display:flex;gap:10px;margin-bottom:26px}
+  .ctab{flex:1 1 0;text-align:center;border:1px solid var(--navy-12);background:#fff;color:#6b7580;font-family:var(--sans);font-weight:600;font-size:15px;padding:15px 12px;border-radius:999px;cursor:pointer;transition:.2s;white-space:nowrap}
+  .ctab:hover{border-color:var(--cerulean);color:var(--navy)}
+  .ctab.active{background:var(--cerulean);color:#fff;border-color:var(--cerulean)}
+  @media(max-width:760px){.ctabs{flex-wrap:wrap}.ctab{flex:1 1 40%}}
   .comp-intro{font-size:16px;color:#4a545c;max-width:76ch;margin-bottom:22px;font-weight:300}
   .comp-intro strong{font-family:var(--serif);color:var(--navy);font-weight:600}
   .comp-panel{display:none}.comp-panel.active{display:block;animation:fade .4s ease}
@@ -448,7 +449,6 @@ compPanels.innerHTML=competitors.map((c,i)=>{
       </div></div></div>`).join('');
  const dots=c.pages.map((pg,pi)=>`<button data-goto="${pi}"${pi===0?' class="on"':''}></button>`).join('');
  return `<div class="comp-panel${i===0?' active':''}" data-i="${i}">
-   <p class="comp-intro"><strong>${c.name}.</strong> ${c.tagline}</p>
    <div class="slider"><div class="ptabs">${ptabs}</div>
      <div class="slide-card"><div class="slide-viewport"><div class="slide-track">${slides}</div></div>
        <div class="slide-ctrl"><div class="sdots">${dots}</div>
